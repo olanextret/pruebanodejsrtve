@@ -42,7 +42,14 @@ RUN npm install pm2 -g
 RUN npm install express
 CMD pm2 list
 
-COPY app.js /conf/aplicaciones/app.js
-COPY appp.js /conf/aplicaciones/appp.js
+#COPY app.js /conf/aplicaciones/app.js
+echo "var express = require('express'); \
+var app = express(); \
+app.get('/', function (req, res) { \
+  res.send('Hello World!'); \
+}); \
+app.listen(3000, function () { \
+  console.log('Example app listening on port 3000!'); \
+}); "
 
 CMD [ "pm2-runtime", "start", "/conf/aplicaciones/app.js", " --output /logs/aplicaciones/out.log", " --error /logs/aplicaciones/error.log"]
