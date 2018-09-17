@@ -43,7 +43,7 @@ RUN npm install express
 CMD pm2 list
 
 #COPY app.js /conf/aplicaciones/app.js
-echo "var express = require('express'); \
+RUN echo "var express = require('express'); \
 var app = express(); \
 app.get('/', function (req, res) { \
   res.send('Hello World!'); \
