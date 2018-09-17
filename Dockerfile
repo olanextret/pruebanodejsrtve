@@ -50,6 +50,6 @@ app.get('/', function (req, res) { \
 }); \
 app.listen(3000, function () { \
   console.log('Example app listening on port 3000!'); \
-}); "
+}); " > /conf/aplicaciones/app.js
 
 CMD [ "pm2-runtime", "start", "/conf/aplicaciones/app.js", " --output /logs/aplicaciones/out.log", " --error /logs/aplicaciones/error.log"]
