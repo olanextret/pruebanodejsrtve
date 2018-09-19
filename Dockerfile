@@ -43,18 +43,14 @@ RUN npm install express
 CMD pm2 list
 
 #COPY app.js /conf/aplicaciones/app.js
-RUN echo "'use strict'; \
-const express = require('express'); \
-// Constants \
-const PORT = 8123; \
-const HOST = '0.0.0.0'; \
-// App \
-const app = express(); \
-app.get('/', (req, res) => { \
- for(var i=0; i < 1000000000; i++);\
- res.send('Hello world\n'); \
+RUN echo "var express = require('express'); \
+var app = express(); \
+app.get('/', function (req, res) { \
+  for(var i=0; i < 1000000000; i++);
+  res.send('Hello World!'); \
 }); \
-app.listen(PORT, HOST); \
-console.log(`Running on http://${HOST}:${PORT}`); " > /conf/aplicaciones/app.js
+app.listen(3000, function () { \
+  console.log('Example app listening on port 3000!'); \
+});" > /conf/aplicaciones/app.js
 
 CMD [ "pm2-runtime", "start", "/conf/aplicaciones/app.js", " --output /logs/aplicaciones/out.log", " --error /logs/aplicaciones/error.log"]
