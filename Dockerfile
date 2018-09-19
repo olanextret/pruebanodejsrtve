@@ -40,14 +40,18 @@ RUN mkdir -p /logs/aplicaciones/
 
 RUN npm install pm2 -g
 RUN npm install express
+RUN npm install redis
 CMD pm2 list
 
 #COPY app.js /conf/aplicaciones/app.js
 RUN echo "var express = require('express'); \
 var app = express(); \
 app.get('/', function (req, res) { \
-  for(var i=0; i < 1000000000; i++); \
-  res.send('Hello World!'); \
+  for(var i=0; i < 1000000000; i++); \ 
+var redis = require("redis"),client = redis.createClient(6379,"redis-master"); \
+client.get('dato', function(err, reply) { \
+    res.send(reply); \
+  }); \
 }); \
 app.listen(3000, function () { \
   console.log('Example app listening on port 3000!'); \
