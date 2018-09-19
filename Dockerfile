@@ -46,7 +46,7 @@ CMD pm2 list
 RUN echo "var express = require('express'); \
 var app = express(); \
 app.get('/', function (req, res) { \
-  for(var i=0; i < 1000000000; i++);
+  for(var i=0; i < 1000000000; i++); \
   res.send('Hello World!'); \
 }); \
 app.listen(3000, function () { \
